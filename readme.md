@@ -5,12 +5,13 @@ YOLOv5 is a modern object detection library. This library provides a light-weigh
 
 
 ### Installation
+注意：libtorch 需要使用 1.8.0 最新版本有错误
 [Libtorch](https://pytorch.org) needs to be availble to your C compiler and linker. For example:
 
 
 ```bash
 cd /tmp
-wget -O libtorch.zip https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.10.0%2Bcu102.zip
+wget -O libtorch.zip https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.8.0%2Bcpu.zip
 unzip libtorch.zip
 mv /tmp/libtorch /usr/local/libtorch
 

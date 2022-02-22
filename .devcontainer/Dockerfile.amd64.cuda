@@ -11,6 +11,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES all
 
 WORKDIR /opt
 
+RUN sed -i "s/http:\/\/archive.ubuntu.com/https:\/\/mirrors.aliyun.com/g" /etc/apt/sources.list
+
 RUN apt update && \
     apt install -y \
     gnupg2 \
@@ -42,7 +44,7 @@ RUN apt-get update && \
     apt clean
 
 
-RUN pip3 install typing_extensions pyyaml
+RUN pip3 install typing_extensions pyyaml -i https://pypi.tuna.tsinghua.edu.cn/simple/ 
 
 RUN cd /tmp && \
     wget -O libtorch.zip https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.10.0%2Bcu102.zip && \
@@ -50,7 +52,7 @@ RUN cd /tmp && \
     mv /tmp/libtorch /usr/local/libtorch
 
 RUN cd /opt && \
-    wget -q https://golang.org/dl/go1.17.3.linux-amd64.tar.gz && \
+    wget -q https://golang.google.cn/dl/go1.17.3.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && \
     tar -C /usr/local -xzf go1.17.3.linux-amd64.tar.gz && \
     rm /opt/go1.17.3.linux-amd64.tar.gz
@@ -70,6 +72,7 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} && \
 
 ENV TARGET_GOPATH=/usr/local/go
 ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
 RUN mkdir -p /tmp/gotools /usr/local/etc/vscode-dev-containers ${TARGET_GOPATH}/bin && \
     cd /tmp/gotools  && \
     export GOPATH=/tmp/gotools && \

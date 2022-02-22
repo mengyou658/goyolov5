@@ -4,3 +4,8 @@ lib
 .devcontainer/devcontainer.json
 tests/outputs/*
 weights
+.devcontainer/id_rsa.pub
+.devcontainer/id_rsa
+.idea/
+test/cpu/*.png
+*.torchscript
